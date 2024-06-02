@@ -1,34 +1,21 @@
 import React from 'react';
 import './App.css';
+import Technologies from './Technologies';
+import Header from './Header';
+import Footer from './Footer';
 
 function App() {
     return (
         <div>
             <Header />
             <Technologies />
+            <Footer />
         </div>
     );
 }
 
-const Technologies = () => {
-    return (
-        <div>
-            <ul>
-                <li>css</li>
-                <li>html</li>
-                <li>js</li>
-                <li>react</li>
-            </ul>
-        </div>
-    )
-}
 
-const Header = () => {
-    return (<div>
-        <a href="#s">Home </a>
-        <a href="#s">News Feed </a>
-        <a href="#s">Messages</a>
-    </div>);
-}
+
+
 
 export default App;
