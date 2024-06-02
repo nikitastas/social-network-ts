@@ -1,15 +1,17 @@
 import React from 'react';
 import './App.css';
-import Technologies from './Technologies';
-import Header from './Header';
-import Footer from './Footer';
 
 function App() {
     return (
-        <div>
-            <Header />
-            <Technologies />
-            <Footer />
+        <div className='app-wrapper'>
+            <header className='header'>
+                <img src="https://img.freepik.com/free-vector/bird-colorful-logo-gradient-vector_343694-1365.jpg?size=338&ext=jpg&ga=GA1.1.632798143.1712966400&semt=ais" alt=""/>
+            </header>
+            <nav className='nav'>
+                <div>Profile</div>
+                <div>Messages</div>
+            </nav>
+            <div className='content'>Main content</div>
         </div>
     );
 }
