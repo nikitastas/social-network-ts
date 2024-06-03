@@ -1,30 +1,36 @@
 .app-wrapper {
-  display: grid;
+    margin: 0 auto;
+    display: grid;
+    width: 1600px;
 
-  grid-template-areas:
-  "h h"
-  "n c";
+    grid-template-areas:
+    "h h"
+    "n c";
 
-   grid-template-rows: 60px 1fr;
+    grid-template-rows: 60px 1fr;
     grid-template-columns: 2fr 10fr;
-    grid-gap: 10px;
+    /*grid-gap: 10px;*/
 }
 
 .header {
-  grid-area: h;
+    grid-area: h;
     background-color: green;
 }
 
 .header img {
-    width: 30px;
+    height: 85%;
 }
 
 .nav {
-  grid-area: n;
+    grid-area: n;
     background-color: blue;
 }
 
 .content {
-  grid-area: c;
+    grid-area: c;
     background-color: red;
+}
+
+.content img {
+    width: 100%;
 }
