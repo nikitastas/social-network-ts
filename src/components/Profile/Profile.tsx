@@ -1,8 +1,8 @@
 import React from 'react';
 import s from './Profile.module.css';
-import MyPosts from './MyPosts/MyPosts';
+import {MyPosts} from './MyPosts/MyPosts';
 
-const Profile = () => {
+export const Profile = () => {
     return (
         <div className={s.content}>
             <div>
@@ -15,5 +15,3 @@ const Profile = () => {
         </div>
     )
 }
-
-export default Profile;
