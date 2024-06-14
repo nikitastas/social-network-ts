@@ -9,6 +9,11 @@
     text-decoration: none;
 }
 
-a.active {
+/*a.active {*/
+/*    color: gold;*/
+/*}*/
+
+.item a:active,
+.item a:focus {
     color: gold;
 }
