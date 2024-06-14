@@ -15,10 +15,11 @@ function App() {
                 <div className={'app-wrapper-content'}>
                     <Routes>
                         <Route path='/profile' element={<Profile/>}/>
-                        <Route path='/messages' element={<Dialogs/>}/>
+                        <Route path='/dialogs' element={<Dialogs/>}/>
+                        <Route path='/news' element={<h1>News</h1>}/>
+                        <Route path='/music' element={<h1>Music</h1>}/>
+                        <Route path='/settings' element={<h1>Settings</h1>}/>
                     </Routes>
-                    <Dialogs/>
-                    {/*<Profile/>*/}
                 </div>
             </div>
         </BrowserRouter>
