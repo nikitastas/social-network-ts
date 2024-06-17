@@ -1,12 +1,12 @@
 import s from './Dialogs.module.css'
 import {NavLink} from 'react-router-dom';
 
-type Props = {
+type PropsDialogItemType = {
     id: number
     name: string
 }
 
-const DialogItem = ({id, name}: Props) => {
+const DialogItem = ({id, name}: PropsDialogItemType) => {
 
     return (
         <div className={s.dialog + ' ' + s.active}>
@@ -25,23 +25,44 @@ const Message = ({message}: PropsMessageType) => {
     )
 }
 
+type DialogsDataType = {
+    id: number
+    name: string
+}
+type MessageDataType = {
+    id: number
+    message: string
+}
+
+
 export const Dialogs = () => {
+    let dialogsData: Array<DialogsDataType> = [
+        {id: 1, name: 'Nikita'},
+        {id: 2, name: 'Ilya'},
+        {id: 3, name: 'Evgeniy'},
+        {id: 4, name: 'Alex'},
+        {id: 5, name: 'Yuriy'},
+        {id: 6, name: 'Roman'},
+    ]
+
+
+    let messageData: Array<MessageDataType> = [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'How is your it-kamasutra?'},
+        {id: 3, message: 'Yo'},
+        {id: 4, message: 'Yo'},
+        {id: 5, message: 'Yo'},
+        {id: 6, message: 'Yo'},
+    ]
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem id={1} name={'Nikita'}/>
-                <DialogItem id={2} name={'Ilya'}/>
-                <DialogItem id={3} name={'Evgeniy'}/>
-                <DialogItem id={4} name={'Alex'}/>
-                <DialogItem id={5} name={'Yuriy'}/>
-                <DialogItem id={6} name={'Roman'}/>
+                <DialogItem id={dialogsData[0].id} name={dialogsData[0].name}/>
+                <DialogItem id={dialogsData[1].id} name={dialogsData[1].name}/>
             </div>
             <div className={s.messages}>
-                <Message message={'Hi'} />
-                <Message message={'How is your it-kamasutra?'} />
-                <Message message={'Yo'} />
-                <Message message={'Yo'} />
-                <Message message={'Yo'} />
+                <Message message={messageData[0].message} />
+                <Message message={messageData[1].message} />
             </div>
         </div>
     );
