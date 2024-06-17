@@ -36,7 +36,7 @@ type MessageDataType = {
 
 
 export const Dialogs = () => {
-    let dialogsData: Array<DialogsDataType> = [
+    let dialogs: Array<DialogsDataType> = [
         {id: 1, name: 'Nikita'},
         {id: 2, name: 'Ilya'},
         {id: 3, name: 'Evgeniy'},
@@ -45,8 +45,7 @@ export const Dialogs = () => {
         {id: 6, name: 'Roman'},
     ]
 
-
-    let messageData: Array<MessageDataType> = [
+    let message: Array<MessageDataType> = [
         {id: 1, message: 'Hi'},
         {id: 2, message: 'How is your it-kamasutra?'},
         {id: 3, message: 'Yo'},
@@ -54,15 +53,17 @@ export const Dialogs = () => {
         {id: 5, message: 'Yo'},
         {id: 6, message: 'Yo'},
     ]
+
+    let dialogsElements = dialogs.map(d => <DialogItem id={d.id} name={d.name}/>)
+    let messageElements = message.map(m => <Message message={m.message} />)
+
     return (
         <div className={s.dialogs}>
             <div className={s.dialogsItems}>
-                <DialogItem id={dialogsData[0].id} name={dialogsData[0].name}/>
-                <DialogItem id={dialogsData[1].id} name={dialogsData[1].name}/>
+                {dialogsElements}
             </div>
             <div className={s.messages}>
-                <Message message={messageData[0].message} />
-                <Message message={messageData[1].message} />
+                {messageElements}
             </div>
         </div>
     );
