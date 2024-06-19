@@ -15,6 +15,7 @@ let posts: Array<PostDataType> = [
   {id: 2, message: "Da da", likesCount: 19},
 ]
 
+
 export type DialogDataType = {
   id: number
   name: string
