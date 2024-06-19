@@ -1,20 +1,12 @@
 import {MyPosts} from './MyPosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
+import {PostDataType} from '../../index';
 
-export type PostsDataType = {
-    id: number
-    message: string
-    likesCount: number
+type Props = {
+    posts: Array<PostDataType>
 }
 
-let posts: Array<PostsDataType> = [
-    {id: 1, message: "Hi, how are you?", likesCount: 12},
-    {id: 2, message: "It's my first post", likesCount: 11},
-    {id: 2, message: "Bla bla", likesCount: 9},
-    {id: 2, message: "Da da", likesCount: 19},
-]
-
-export const Profile = () => {
+export const Profile = ({posts}: Props) => {
     return (
         <div>
             <ProfileInfo/>

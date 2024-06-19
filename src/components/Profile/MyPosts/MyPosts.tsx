@@ -1,9 +1,9 @@
 import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
-import {PostsDataType} from '../Profile';
+import {PostDataType} from '../../../index';
 
 type Props = {
-    posts: Array<PostsDataType>
+    posts: Array<PostDataType>
 }
 
 export const MyPosts = ({posts}: Props) => {
