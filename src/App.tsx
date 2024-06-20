@@ -4,7 +4,7 @@ import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
 import {Dialogs} from './components/Dialogs/Dialogs';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {PostDataType, DialogDataType, MessageDataType} from './index';
+import {PostDataType, DialogDataType, MessageDataType} from './redux/state';
 
 type Props = {
     posts: Array<PostDataType>
