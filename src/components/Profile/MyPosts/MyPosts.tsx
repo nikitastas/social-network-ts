@@ -7,9 +7,11 @@ type Props = {
 }
 
 export const MyPosts = ({posts}: Props) => {
-
-
     let postsElements = posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+
+    const addPostHandler = () => {
+        alert('Hei')
+    }
 
     return (
         <div className={s.postsBlock}>
@@ -19,7 +21,7 @@ export const MyPosts = ({posts}: Props) => {
                     <textarea>Add some text</textarea>
                 </div>
                 <div>
-                    <button onClick={ () => {alert('Hei')} }>Add post</button>
+                    <button onClick={ addPostHandler }>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>
