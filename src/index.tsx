@@ -7,12 +7,15 @@ import {state} from './redux/state'
 import { addPost } from './redux/state';
 
 
+addPost('SamuraiJS.com')
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App posts={state.profilePage.posts} dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages}/>
+    <App posts={state.profilePage.posts} dialogs={state.dialogsPage.dialogs} messages={state.dialogsPage.messages}
+    addPost={addPost}/>
   </React.StrictMode>
 );
 

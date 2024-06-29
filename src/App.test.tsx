@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import {addPost} from './redux/state';
 
 export type PostDataType = {
   id: number
@@ -44,7 +45,7 @@ let messages: Array<MessageDataType> = [
 ]
 
 test('renders learn react link', () => {
-  render(<App posts={posts} dialogs={dialogs} messages={messages} />);
+  render(<App posts={posts} dialogs={dialogs} messages={messages} addPost={addPost} />);
   const linkElement = screen.getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });
