@@ -15,7 +15,11 @@ export const MyPosts = ({posts, addPost}: Props) => {
     let newPostElement = useRef<HTMLTextAreaElement>(null)
 
     const addPostHandler = () => {
-        if (newPostElement.current) addPost(newPostElement.current.value)
+        if (newPostElement.current) {
+            addPost(newPostElement.current.value)
+            newPostElement.current.value = ''
+        }
+
     }
 
     return (
