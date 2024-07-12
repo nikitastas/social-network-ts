@@ -10,10 +10,12 @@ type Props = {
     posts: Array<PostDataType>
     dialogs: Array<DialogDataType>
     messages: Array<MessageDataType>
-    addPost: (postMessage: string) => void
+    newPostText: string
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
-function App({posts, dialogs, messages, addPost}: Props) {
+function App({posts, dialogs, messages, newPostText, addPost, updateNewPostText}: Props) {
     return (
         <BrowserRouter>
             <div className="app-wrapper">
@@ -21,7 +23,10 @@ function App({posts, dialogs, messages, addPost}: Props) {
                 <Navbar/>
                 <div className={'app-wrapper-content'}>
                     <Routes>
-                        <Route path='/profile/*' element={<Profile posts={posts} addPost={addPost}/>}/>
+                        <Route path='/profile/*' element={<Profile posts={posts}
+                                                                   newPostText={newPostText}
+                                                                   addPost={addPost}
+                                                                   updateNewPostText={updateNewPostText}/>}/>
                         <Route path='/dialogs/*' element={<Dialogs dialogs={dialogs} messages={messages}/>}/>
                         <Route path='/news' element={<h1>News</h1>}/>
                         <Route path='/music' element={<h1>Music</h1>}/>
