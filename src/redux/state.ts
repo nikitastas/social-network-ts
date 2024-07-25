@@ -1,4 +1,5 @@
-import {rerenderEntireTree} from '../render';
+import {rerenderEntireTree} from '../index';
+
 
 export type PostDataType = {
     id: number
