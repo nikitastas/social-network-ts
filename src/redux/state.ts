@@ -1,4 +1,6 @@
-import {rerenderEntireTree} from '../index';
+let rerenderEntireTree = () => {
+    console.log('State was changed')
+}
 
 
 export type PostDataType = {
