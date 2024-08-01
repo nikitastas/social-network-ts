@@ -1,5 +1,5 @@
 let rerenderEntireTree = () => {
-    console.log('State was changed')
+    console.log('State changed')
 }
 
 
@@ -70,10 +70,12 @@ export let addPost = () => {
     }
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
-    rerenderEntireTree(state)
+    rerenderEntireTree()
+    // rerenderEntireTree(state)
 }
 
 export let updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
-    rerenderEntireTree(state)
+    rerenderEntireTree()
+    // rerenderEntireTree(state)
 }
