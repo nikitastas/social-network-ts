@@ -1,4 +1,4 @@
-let rerenderEntireTree = () => {
+let rerenderEntireTree = (state: StateType) => {
     console.log('State changed')
 }
 
@@ -62,7 +62,7 @@ export let state: StateType = {
 // @ts-ignore
 window.state = state
 
-export let addPost = () => {
+export const addPost = () => {
     let newPost = {
         id: 5,
         message: state.profilePage.newPostText,
@@ -70,12 +70,14 @@ export let addPost = () => {
     }
     state.profilePage.posts.push(newPost)
     state.profilePage.newPostText = ''
-    rerenderEntireTree()
-    // rerenderEntireTree(state)
+    rerenderEntireTree(state)
 }
 
-export let updateNewPostText = (newText: string) => {
+export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
-    rerenderEntireTree()
-    // rerenderEntireTree(state)
+    rerenderEntireTree(state)
+}
+
+export const subscribe = (observer: (state: StateType) => void) => {
+    rerenderEntireTree = observer
 }

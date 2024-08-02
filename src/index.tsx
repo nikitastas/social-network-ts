@@ -1,10 +1,10 @@
 import React from 'react';
 import './index.css';
-import {state} from './redux/state';
+import {state, subscribe} from './redux/state';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {addPost, updateNewPostText} from './redux/state';
+import {addPost, StateType, updateNewPostText} from './redux/state';
 
 
 
@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(
 );
 
 
-let rerenderEntireTree = () => {
+let rerenderEntireTree = (state: StateType) => {
     root.render(
         <React.StrictMode>
             <App posts={state.profilePage.posts}
@@ -26,4 +26,6 @@ let rerenderEntireTree = () => {
         </React.StrictMode>
     )
 }
-rerenderEntireTree()
+rerenderEntireTree(state)
+
+subscribe(rerenderEntireTree)
