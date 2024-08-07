@@ -1,10 +1,10 @@
 import React from 'react';
 import './index.css';
-import {state, subscribe} from './redux/state';
+import {store} from './redux/state';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {addPost, StateType, updateNewPostText} from './redux/state';
+import {StateType} from './redux/state';
 
 
 
@@ -20,12 +20,12 @@ let rerenderEntireTree = (state: StateType) => {
                  newPostText={state.profilePage.newPostText}
                  dialogs={state.dialogsPage.dialogs}
                  messages={state.dialogsPage.messages}
-                 addPost={addPost}
-                 updateNewPostText={updateNewPostText}
+                 addPost={store.addPost}
+                 updateNewPostText={store.updateNewPostText}
             />
         </React.StrictMode>
     )
 }
-rerenderEntireTree(state)
+rerenderEntireTree(store._state)
 
-subscribe(rerenderEntireTree)
+store.subscribe(rerenderEntireTree)
