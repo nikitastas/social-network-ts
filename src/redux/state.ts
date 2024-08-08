@@ -31,6 +31,9 @@ export let store = {
     getState() {
        return this._state
     },
+    _callSubscriber(state: StateType) {
+        console.log('State changed')
+    },
     addPost() {
         let newPost = {
             id: 5,
@@ -39,19 +42,15 @@ export let store = {
         }
         this._state.profilePage.posts.push(newPost)
         this._state.profilePage.newPostText = ''
-        rerenderEntireTree(this._state)
+        this._callSubscriber(this._state)
     },
     updateNewPostText(newText: string) {
         this._state.profilePage.newPostText = newText
-        rerenderEntireTree(this._state)
+        this._callSubscriber(this._state)
     },
     subscribe(observer: (state: StateType) => void) {
-        rerenderEntireTree = observer
+        this._callSubscriber = observer
     }
-}
-
-let rerenderEntireTree = (state: StateType) => {
-    console.log('State changed')
 }
 
 
