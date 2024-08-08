@@ -26,6 +26,6 @@ let rerenderEntireTree = (state: StateType) => {
         </React.StrictMode>
     )
 }
-rerenderEntireTree(store._state)
+rerenderEntireTree(store.getState())
 
 store.subscribe(rerenderEntireTree)
