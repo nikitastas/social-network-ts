@@ -49,8 +49,7 @@ test('renders learn react link', () => {
               newPostText={'aaa'}
               dialogs={dialogs}
               messages={messages}
-              addPost={store.addPost}
-              updateNewPostText={store.updateNewPostText}/>);
+              dispatch={store.dispatch}/>);
   const linkElement = screen.getByText(/learn react/i);
   expect(linkElement).toBeInTheDocument();
 });
