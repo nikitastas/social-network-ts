@@ -7,22 +7,23 @@ import {PostDataType} from '../../../redux/state';
 type Props = {
     posts: Array<PostDataType>
     newPostText: string
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: any) => void
 }
 
-export const MyPosts = ({posts, newPostText, addPost, updateNewPostText}: Props) => {
+export const MyPosts = ({posts, newPostText, dispatch}: Props) => {
     let postsElements = posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
     let newPostElement = useRef<HTMLTextAreaElement>(null)
 
     const addPostHandler = () => {
-        addPost()
+        //addPost()
+        dispatch({type: 'ADD-POST'})
     }
 
     const onPostChange = () => {
         if (newPostElement.current) {
-            updateNewPostText(newPostElement.current.value)
+            //updateNewPostText(newPostElement.current.value)
+            dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: newPostElement.current.value})
         }
     }
 

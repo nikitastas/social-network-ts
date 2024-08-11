@@ -5,15 +5,14 @@ import {PostDataType} from '../../redux/state';
 type Props = {
     posts: Array<PostDataType>
     newPostText: string
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: any) => void
 }
 
-export const Profile = ({posts, newPostText, addPost, updateNewPostText}: Props) => {
+export const Profile = ({posts, newPostText, dispatch}: Props) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={posts} newPostText={newPostText} addPost={addPost} updateNewPostText={updateNewPostText}/>
+            <MyPosts posts={posts} newPostText={newPostText} dispatch={dispatch}/>
         </div>
     )
 }
