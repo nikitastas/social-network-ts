@@ -3,6 +3,11 @@ import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
 import {PostDataType} from '../../../redux/state';
 
+let addPostActionCreator = () => {
+    return {
+        type: 'ADD-POST'
+    }
+}
 
 type Props = {
     posts: Array<PostDataType>
@@ -17,7 +22,7 @@ export const MyPosts = ({posts, newPostText, dispatch}: Props) => {
 
     const addPostHandler = () => {
         //addPost()
-        dispatch({type: 'ADD-POST'})
+        dispatch(addPostActionCreator())
     }
 
     const onPostChange = () => {
