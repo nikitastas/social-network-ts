@@ -9,6 +9,13 @@ let addPostActionCreator = () => {
     }
 }
 
+let updateNewPostTextActionCreator = (newText: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: newText
+    }
+}
+
 type Props = {
     posts: Array<PostDataType>
     newPostText: string
@@ -28,7 +35,8 @@ export const MyPosts = ({posts, newPostText, dispatch}: Props) => {
     const onPostChange = () => {
         if (newPostElement.current) {
             //updateNewPostText(newPostElement.current.value)
-            dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: newPostElement.current.value})
+            //dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: newPostElement.current.value})
+            dispatch(updateNewPostTextActionCreator(newPostElement.current.value))
         }
     }
 
