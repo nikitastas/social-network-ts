@@ -20,6 +20,7 @@ let rerenderEntireTree = (state: StateType) => {
                  newPostText={state.profilePage.newPostText}
                  dialogs={state.dialogsPage.dialogs}
                  messages={state.dialogsPage.messages}
+                 newMessageBody={state.dialogsPage.newMessageBody}
                  dispatch={store.dispatch.bind(store)}
             />
         </React.StrictMode>
