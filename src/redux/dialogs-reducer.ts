@@ -1,3 +1,16 @@
-export const dialogsReducer = (state: any, action: any) => {
+import {DialogsPageType} from './state';
 
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+const SEND_MESSAGE = 'SEND-MESSAGE'
+
+export const dialogsReducer = (state: DialogsPageType, action: any) => {
+    if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+        state.newMessageBody = action.body
+    } else if (action.type === SEND_MESSAGE) {
+        let body = state.newMessageBody
+        state.newMessageBody = ''
+        state.messages.push({id: 6, message: body})
+    }
+
+    return state
 }

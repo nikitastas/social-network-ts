@@ -1,8 +1,6 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+import {profileReducer} from './profile-reducer';
+import {dialogsReducer} from './dialogs-reducer';
 
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
-const SEND_MESSAGE = 'SEND-MESSAGE'
 
 export let store = {
     _state: {
@@ -45,6 +43,11 @@ export let store = {
         this._callSubscriber = observer
     },
     dispatch(action: any) {
+
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+
         if (action.type === ADD_POST) {
             let newPost = {
                 id: 5,
@@ -88,16 +91,20 @@ export type MessageDataType = {
     message: string
 }
 
+export type ProfilePageType = {
+    posts: Array<PostDataType>
+    newPostText: string
+}
+
+export type DialogsPageType = {
+    dialogs: Array<DialogDataType>
+    messages: Array<MessageDataType>
+    newMessageBody: string
+}
+
 export type StateType = {
-    profilePage: {
-        posts: Array<PostDataType>
-        newPostText: string
-    }
-    dialogsPage: {
-        dialogs: Array<DialogDataType>
-        messages: Array<MessageDataType>
-        newMessageBody: string
-    }
+    profilePage: ProfilePageType
+    dialogsPage: DialogsPageType
 }
 
 export const addPostActionCreator = () => ({type: ADD_POST})
