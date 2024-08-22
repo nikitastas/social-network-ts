@@ -28,4 +28,7 @@ let rerenderEntireTree = (state: StateType) => {
 }
 rerenderEntireTree(store.getState())
 
-store.subscribe(rerenderEntireTree)
+store.subscribe(() => {
+    let state = store.getState()
+    rerenderEntireTree(state)
+})
