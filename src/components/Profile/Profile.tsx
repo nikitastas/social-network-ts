@@ -1,6 +1,6 @@
 import {MyPosts} from './MyPosts/MyPosts';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
-import {PostDataType} from '../../redux/state';
+import {PostDataType} from '../../redux/store';
 
 type Props = {
     posts: Array<PostDataType>
