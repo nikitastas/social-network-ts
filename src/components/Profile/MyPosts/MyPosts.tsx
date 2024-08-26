@@ -7,24 +7,22 @@ import {addPostActionCreator, updateNewPostTextActionCreator} from '../../../red
 type Props = {
     posts: Array<PostDataType>
     newPostText: string
-    dispatch: (action: any) => void
+    updateNewPostText: (text: string) => void
+    addPost: () => void
 }
 
-export const MyPosts = ({posts, newPostText, dispatch}: Props) => {
+export const MyPosts = ({posts, newPostText, addPost, updateNewPostText}: Props) => {
     let postsElements = posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
 
     let newPostElement = useRef<HTMLTextAreaElement>(null)
 
-    const addPostHandler = () => {
-        //addPost()
-        dispatch(addPostActionCreator())
+    const onAddPost = () => {
+        addPost()
     }
 
     const onPostChange = () => {
         if (newPostElement.current) {
-            //updateNewPostText(newPostElement.current.value)
-            //dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: newPostElement.current.value})
-            dispatch(updateNewPostTextActionCreator(newPostElement.current.value))
+            updateNewPostText(newPostElement.current.value)
         }
     }
 
@@ -36,7 +34,7 @@ export const MyPosts = ({posts, newPostText, dispatch}: Props) => {
                     <textarea ref={newPostElement} value={newPostText} onChange={onPostChange}/>
                 </div>
                 <div>
-                    <button onClick={addPostHandler}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={s.posts}>
