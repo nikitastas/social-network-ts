@@ -1,18 +1,16 @@
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
-import {PostDataType} from '../../redux/store';
+import {StoreType} from '../../redux/store';
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 
 type Props = {
-    posts: Array<PostDataType>
-    newPostText: string
-    dispatch: (action: any) => void
+    store: StoreType
 }
 
-export const Profile = ({posts, newPostText, dispatch}: Props) => {
+export const Profile = ({store}: Props) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer posts={posts} newPostText={newPostText} dispatch={dispatch}/>
+            <MyPostsContainer store={store}/>
         </div>
     )
 }

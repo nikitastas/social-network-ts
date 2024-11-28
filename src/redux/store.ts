@@ -3,7 +3,7 @@ import {dialogsReducer} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
 
 
-export let store = {
+export let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -93,12 +93,14 @@ export type StateType = {
     sidebar: SidebarType
 }
 
-/*type StoreType = {
+export type StoreType = {
     _state: StateType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    getState: () => StateType
+    _callSubscriber: (state: StateType) => void
     subscribe: (observer: (state: StateType) => void) => void
-}*/
+    dispatch: (action: any) => void
+    updateNewPostText: (newText: string) => void
+}
 
 
 
