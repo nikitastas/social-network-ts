@@ -1,12 +1,14 @@
-import {StoreType} from '../../../redux/store';
 import {addPostActionCreator, updateNewPostTextActionCreator} from '../../../redux/profile-reducer';
 import {MyPosts} from './MyPosts';
+import {StoreContext} from '../../../StoreContext';
+import {useContext} from 'react';
 
 type Props = {
-    store: StoreType
+
 }
 
-export const MyPostsContainer = ({store}: Props) => {
+export const MyPostsContainer = ({}: Props) => {
+    let store = useContext(StoreContext)
 
     let state = store.getState()
 

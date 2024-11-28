@@ -1,10 +1,10 @@
 import React from 'react';
 import './index.css';
-//import {store} from './redux/redux-store';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {StateType, store, StoreType} from './redux/store';
+import {store, StoreType} from './redux/store';
+import {StoreContext} from './StoreContext';
 
 
 
@@ -13,16 +13,17 @@ const root = ReactDOM.createRoot(
 );
 
 
-let rerenderEntireTree = (state: StateType, store: StoreType) => {
+let rerenderEntireTree = (store: StoreType) => {
     root.render(
         <React.StrictMode>
-            <App store={store} />
+            <StoreContext.Provider value={store}>
+                <App />
+            </StoreContext.Provider>
         </React.StrictMode>
     )
 }
-rerenderEntireTree(store.getState(), store)
+rerenderEntireTree(store)
 
 store.subscribe(() => {
-    let state = store.getState()
-    rerenderEntireTree(state, store)
+    rerenderEntireTree(store)
 })

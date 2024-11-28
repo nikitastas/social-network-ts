@@ -1,12 +1,16 @@
 import {StoreType} from '../../redux/store';
 import {sendMessageCreator, updateNewMessageBodyCreator} from '../../redux/dialogs-reducer';
 import {Dialogs} from './Dialogs';
+import {useContext} from 'react';
+import {StoreContext} from '../../StoreContext';
 
 type Props = {
-    store: StoreType
+
 }
 
-export const DialogsContainer = ({store}: Props) => {
+export const DialogsContainer = ({}: Props) => {
+    let store = useContext(StoreContext)
+
     let state = store.getState()
 
     const onSendMessageClick = () => {
