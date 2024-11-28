@@ -1,20 +1,12 @@
-import {
-    AddPostActionType,
-    profileReducer,
-    UpdateNewPostTextActionType
-} from './profile-reducer';
-import {
-    dialogsReducer,
-    SendMessageActionType,
-    UpdateNewMessageBodyActionType
-} from './dialogs-reducer';
-import {sidebarReducer} from './sidebar-reducer';
+/*
+import {AddPostActionType, UpdateNewPostTextActionType} from './profile-reducer';
+import {SendMessageActionType, UpdateNewMessageBodyActionType} from './dialogs-reducer';
 
 
 export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType |
     UpdateNewMessageBodyActionType | SendMessageActionType
 
-export let store: StoreType = {
+/!*export let store: StoreType = {
     _state: {
         profilePage: {
             posts: [
@@ -68,7 +60,7 @@ export let store: StoreType = {
 
     },
 
-}
+}*!/
 
 
 export type PostDataType = {
@@ -104,7 +96,7 @@ export type StateType = {
     sidebar: SidebarType
 }
 
-export type StoreType = {
+type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: (state: StateType) => void
@@ -115,4 +107,6 @@ export type StoreType = {
 
 
 // @ts-ignore
-window.store = store
+// window.store = store*/
+
+export {}

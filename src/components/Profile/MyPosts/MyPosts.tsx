@@ -1,7 +1,7 @@
 import {useRef} from 'react';
 import s from './MyPosts.module.css';
 import {Post} from './Post/Post';
-import {PostDataType} from '../../../redux/store';
+import {PostDataType} from '../../../redux/profile-reducer';
 
 type Props = {
     posts: Array<PostDataType>
@@ -11,7 +11,7 @@ type Props = {
 }
 
 export const MyPosts = ({posts, newPostText, addPost, updateNewPostText}: Props) => {
-    let postsElements = posts.map(p => <Post message={p.message} likesCount={p.likesCount}/>)
+    let postsElements = posts.map(p => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     let newPostElement = useRef<HTMLTextAreaElement>(null)
 

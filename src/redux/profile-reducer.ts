@@ -1,14 +1,25 @@
-import {ActionTypes, ProfilePageType} from './store';
+import {v1} from 'uuid';
 
 export const ADD_POST = 'ADD-POST';
 export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
+export type PostDataType = {
+    id: string
+    message: string
+    likesCount: number
+}
+
+export type ProfilePageType = {
+    posts: Array<PostDataType>
+    newPostText: string
+}
+
 let initialState = {
     posts: [
-        {id: 1, message: "Hi, how are you?", likesCount: 12},
-        {id: 2, message: "It's my first post", likesCount: 11},
-        {id: 2, message: "Bla bla", likesCount: 9},
-        {id: 2, message: "Da da", likesCount: 19},
+        {id: v1(), message: "Hi, how are you?", likesCount: 12},
+        {id: v1(), message: "It's my first post", likesCount: 11},
+        {id: v1(), message: "Bla bla", likesCount: 9},
+        {id: v1(), message: "Da da", likesCount: 19},
     ],
     newPostText: 'it-kamasutra.com'
 }
@@ -16,17 +27,9 @@ let initialState = {
 export const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes) => {
     switch (action.type) {
         case ADD_POST:
-            let newPost = {
-                id: 5,
-                message: state.newPostText,
-                likesCount: 0,
-            }
-            state.posts.push(newPost)
-            state.newPostText = ''
-            return {...state}
+            return {...state, posts: [...state.posts, {id: v1(), message: state.newPostText, likesCount: 0}], newPostText: ''}
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText
-            return {...state}
+            return {...state, newPostText: action.newText}
         default:
             return state
     }
@@ -41,7 +44,7 @@ export type UpdateNewPostTextActionType = {
     newText: string
 }
 
-export type ProfileReducerActionTypes = AddPostActionType | UpdateNewPostTextActionType
+export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType
 
 export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST} as const)
 

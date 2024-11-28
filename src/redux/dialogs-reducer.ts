@@ -1,7 +1,21 @@
-import {ActionTypes, DialogsPageType} from './store';
 
 export const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 export const SEND_MESSAGE = 'SEND-MESSAGE'
+
+export type DialogDataType = {
+    id: number
+    name: string
+}
+export type MessageDataType = {
+    id: number
+    message: string
+}
+
+export type DialogsPageType = {
+    dialogs: Array<DialogDataType>
+    messages: Array<MessageDataType>
+    newMessageBody: string
+}
 
 let initialState = {
     dialogs: [
@@ -47,7 +61,7 @@ export type SendMessageActionType = {
     type: typeof SEND_MESSAGE
 }
 
-export type DialogsReducerActionTypes = UpdateNewMessageBodyActionType | SendMessageActionType
+export type ActionTypes = UpdateNewMessageBodyActionType | SendMessageActionType
 
 export const updateNewMessageBodyCreator = (body: string): UpdateNewMessageBodyActionType => (
     {
