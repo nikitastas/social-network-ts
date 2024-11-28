@@ -3,8 +3,9 @@ import './index.css';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import {store, StoreType} from './redux/store';
+import {store} from './redux/redux-store';
 import {StoreContext} from './StoreContext';
+import {StoreType} from './redux/store';
 
 
 
