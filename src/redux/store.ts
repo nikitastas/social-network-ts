@@ -1,7 +1,18 @@
-import {profileReducer} from './profile-reducer';
-import {dialogsReducer} from './dialogs-reducer';
+import {
+    AddPostActionType,
+    profileReducer,
+    UpdateNewPostTextActionType
+} from './profile-reducer';
+import {
+    dialogsReducer,
+    SendMessageActionType,
+    UpdateNewMessageBodyActionType
+} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
 
+
+export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType |
+    UpdateNewMessageBodyActionType | SendMessageActionType
 
 export let store: StoreType = {
     _state: {
@@ -44,7 +55,7 @@ export let store: StoreType = {
     subscribe(observer: (state: StateType) => void) {
         this._callSubscriber = observer
     },
-    dispatch(action: any) {
+    dispatch(action: ActionTypes) {
 
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
@@ -98,10 +109,9 @@ export type StoreType = {
     getState: () => StateType
     _callSubscriber: (state: StateType) => void
     subscribe: (observer: (state: StateType) => void) => void
-    dispatch: (action: any) => void
+    dispatch: (action: ActionTypes) => void
     updateNewPostText: (newText: string) => void
 }
-
 
 
 // @ts-ignore

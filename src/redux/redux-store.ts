@@ -2,12 +2,15 @@ import {combineReducers, createStore} from 'redux';
 import {profileReducer} from './profile-reducer';
 import {dialogsReducer} from './dialogs-reducer';
 import {sidebarReducer} from './sidebar-reducer';
-import {StoreType} from './store';
 
-let reducers = combineReducers({
+let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer
 })
 
-export let store: StoreType = createStore(reducers)
+export type RootState = ReturnType<typeof rootReducer>;
+
+const state = createStore(rootReducer)
+
+export default state
