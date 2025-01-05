@@ -10,6 +10,9 @@ export const Navbar = () => {
             <div className={`${s.item} ${s.active}`}>
                 <NavLink to={'/dialogs'} className={({isActive}) => isActive ? s.active : ''}>Messages</NavLink>
             </div>
+            <div className={`${s.item} ${s.active}`}>
+                <NavLink to={'/users'} className={({isActive}) => isActive ? s.active : ''}>Users</NavLink>
+            </div>
             <div className={s.item}>
                 <NavLink to={'/news'} className={({isActive}) => isActive ? s.active : ''}>News</NavLink>
             </div>
