@@ -5,15 +5,15 @@ export const UNFOLLOW = 'UNFOLLOW';
 export const SET_USERS = 'SET_USERS';
 
 export type UserType = {
-    id: string
-    photoUrl: string
-    followed: boolean
-    fullName: string
-    status: string
-    location: {
-        city: string
-        country: string
+    id: number
+    name: string
+    status?: string
+    photos: {
+        small?: string
+        large?: string
     }
+    followed: boolean
+    uniqueUrlName?: string
 }
 
 export type UsersType = {
@@ -64,12 +64,12 @@ export const usersReducer = (state: UsersType = initialState, action: ActionType
 
 export type FollowActionType = {
     type: typeof FOLLOW
-    userId: string
+    userId: number
 }
 
 export type UnfollowActionType = {
     type: typeof UNFOLLOW
-    userId: string
+    userId: number
 }
 
 export type SetUsersActionType = {
@@ -79,8 +79,8 @@ export type SetUsersActionType = {
 
 export type ActionTypes = FollowActionType | UnfollowActionType | SetUsersActionType
 
-export const followAC = (userId: string): FollowActionType => ({type: FOLLOW, userId} as const)
-export const unfollowAC = (userId: string): UnfollowActionType => ({type: UNFOLLOW, userId} as const)
+export const followAC = (userId: number): FollowActionType => ({type: FOLLOW, userId} as const)
+export const unfollowAC = (userId: number): UnfollowActionType => ({type: UNFOLLOW, userId} as const)
 
 export const setUsersAC = (users: UserType[]): SetUsersActionType => (
     {

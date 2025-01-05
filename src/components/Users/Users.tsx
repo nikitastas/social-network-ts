@@ -1,18 +1,44 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {UserType} from "../../redux/users-reducer";
 import styles from './Users.module.css'
-import {v1} from "uuid";
+import axios from "axios";
+import userPhoto from '../../assets/images/user-image.jpg'
+
+export type UsersResponseType = {
+	items: RootObjectItems[];
+	totalCount: number;
+	error?: any;
+}
+export type RootObjectItemsPhotos = {
+	small?: any;
+	large?: any;
+}
+export type RootObjectItems = {
+	name: string;
+	id: number;
+	uniqueUrlName?: any;
+	photos: RootObjectItemsPhotos;
+	status?: any;
+	followed: boolean;
+}
+
 
 type Props = {
     users: UserType[]
-    follow: (userId: string) => void
-    unfollow: (userId: string) => void
+    follow: (userId: number) => void
+    unfollow: (userId: number) => void
     setUsers: (users: UserType[]) => void
 }
 
 export const Users = ({users, follow, unfollow, setUsers}: Props) => {
+	if (users.length === 0) {
+		axios.get<UsersResponseType>('https://social-network.samuraijs.com/api/1.0/users').then(res => {
+			console.log(res)
+			setUsers(res.data.items)
+		})
+	}
 
-    useEffect(() => {
+    /*useEffect(() => {
         setUsers([
             {
                 id: v1(),
@@ -39,7 +65,7 @@ export const Users = ({users, follow, unfollow, setUsers}: Props) => {
                 location: {city: 'Kiev', country: 'Ukraine'}
             },
         ])
-    }, [])
+    }, [])*/
 
     return (
         <div>
@@ -47,7 +73,7 @@ export const Users = ({users, follow, unfollow, setUsers}: Props) => {
                 users.map(u => <div key={u.id}>
                     <span>
                         <div>
-                            <img src={u.photoUrl} className={styles.userPhoto}/>
+                            <img src={u.photos.small !== null ? u.photos.small : userPhoto} className={styles.userPhoto}/>
                         </div>
                         <div>
                             {u.followed
@@ -57,12 +83,12 @@ export const Users = ({users, follow, unfollow, setUsers}: Props) => {
                     </span>
                     <span>
                         <span>
-                            <div>{u.fullName}</div>
+                            <div>{u.name}</div>
                             <div>{u.status}</div>
                         </span>
                         <span>
-                            <div>{u.location.country}</div>
-                            <div>{u.location.city}</div>
+                            <div>{'u.location.country'}</div>
+                            <div>{'u.location.city'}</div>
                         </span>
                     </span>
                 </div>)
