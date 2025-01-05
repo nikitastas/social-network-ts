@@ -1,4 +1,3 @@
-import {v1} from 'uuid';
 
 export const FOLLOW = 'FOLLOW';
 export const UNFOLLOW = 'UNFOLLOW';
