@@ -31,11 +31,14 @@ type Props = {
 }
 
 export const Users = ({users, follow, unfollow, setUsers}: Props) => {
-	if (users.length === 0) {
-		axios.get<UsersResponseType>('https://social-network.samuraijs.com/api/1.0/users').then(res => {
-			console.log(res)
-			setUsers(res.data.items)
-		})
+
+	const getUsers = () => {
+		if (users.length === 0) {
+			axios.get<UsersResponseType>('https://social-network.samuraijs.com/api/1.0/users').then(res => {
+				console.log(res)
+				setUsers(res.data.items)
+			})
+		}
 	}
 
     /*useEffect(() => {
@@ -69,6 +72,7 @@ export const Users = ({users, follow, unfollow, setUsers}: Props) => {
 
     return (
         <div>
+			<button onClick={getUsers}>Get Users</button>
             {
                 users.map(u => <div key={u.id}>
                     <span>
