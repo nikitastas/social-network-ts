@@ -1,91 +1,50 @@
-import React from 'react';
+import React from 'react'
+import styles from "./Users.module.css";
+import userPhoto from "../../assets/images/user-image.jpg";
 import {UserType} from "../../redux/users-reducer";
-import styles from './Users.module.css'
-import axios from "axios";
-import userPhoto from '../../assets/images/user-image.jpg'
 
-export type UsersResponseType = {
-	items: RootObjectItems[];
-	totalCount: number;
-	error?: any;
-}
-export type RootObjectItemsPhotos = {
-	small?: any;
-	large?: any;
-}
-export type RootObjectItems = {
-	name: string;
-	id: number;
-	uniqueUrlName?: any;
-	photos: RootObjectItemsPhotos;
-	status?: any;
-	followed: boolean;
-}
-
-
-type Props = {
+type UserProps = {
     users: UserType[]
-	pageSize: number
-	totalUsersCount: number
-	currentPage: number
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    setUsers: (users: UserType[]) => void
-	setCurrentPage: (currentPage: number) => void
-	setTotalUsersCount: (totalCount: number) => void
+    onPageChanged: (pageNumber: number) => void
 }
 
-export class Users extends React.Component<Props> {
-	componentDidMount() {
-		if (this.props.users.length === 0) {
-			axios.get<UsersResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-				.then(res => {
-				    this.props.setUsers(res.data.items)
-				    this.props.setTotalUsersCount(res.data.totalCount)
-			})
-		}
-	}
+export const Users = ({users, pageSize, totalUsersCount, currentPage, follow, unfollow, onPageChanged}: UserProps) => {
 
-	oncPageChanged = (pageNumber: number) => {
-		this.props.setCurrentPage(pageNumber)
-		axios.get<UsersResponseType>(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-			.then(res => {
-				this.props.setUsers(res.data.items)
-			})
-	}
+    let pagesCount = Math.ceil(totalUsersCount / pageSize)
 
-	render() {
+    let pages = []
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i)
+    }
 
-		let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize)
-
-		let pages = []
-		for (let i = 1; i <= pagesCount; i++) {
-			pages.push(i)
-		}
-
-		return (
-			<div>
-				<div>
-					{pages.map(p => {
-					return <span className={this.props.currentPage === p ? styles.selectedPage : ''}
-								 onClick={() => this.oncPageChanged(p)}>{p}</span>
-					})}
-				</div>
-				{
-					this.props.users.map(u => <div key={u.id}>
+    return (
+        <div>
+            <div>
+                {pages.map(p => {
+                    return <span className={currentPage === p ? styles.selectedPage : ''}
+                                 onClick={() => onPageChanged(p)}>{p}</span>
+                })}
+            </div>
+            {
+                users.map(u => <div key={u.id}>
                     <span>
                         <div>
                             <img src={u.photos.small !== null ? u.photos.small : userPhoto}
-								 alt={'avatar'}
-								 className={styles.userPhoto}/>
+                                 alt={'avatar'}
+                                 className={styles.userPhoto}/>
                         </div>
                         <div>
                             {u.followed
-								? <button onClick={() => this.props.unfollow(u.id)}>Unfollow</button>
-								: <button onClick={() => this.props.follow(u.id)}>Follow</button>}
+                                ? <button onClick={() => unfollow(u.id)}>Unfollow</button>
+                                : <button onClick={() => follow(u.id)}>Follow</button>}
                         </div>
                     </span>
-						<span>
+                    <span>
                         <span>
                             <div>{u.name}</div>
                             <div>{u.status}</div>
@@ -95,9 +54,8 @@ export class Users extends React.Component<Props> {
                             <div>{'u.location.city'}</div>
                         </span>
                     </span>
-					</div>)
-				}
-			</div>
-		)
-	}
+                </div>)
+            }
+        </div>
+    )
 }
