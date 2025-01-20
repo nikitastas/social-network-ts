@@ -17,8 +17,9 @@ export const ProfileInfo = ({profile}: ProfileInfoProps) => {
                 <img src="https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171_1280.jpg" alt=""/>
             </div>
             <div className={s.descriptionBlock}>
-                <img src={profile?.photos.large} alt="Profile Avatar"/>
-                ava + description
+                <img src={profile?.photos.large} alt="Profile Avatar "/>
+                <div>{' ' + profile.fullName + ' '}</div>
+                <div>description</div>
             </div>
         </div>
     )
