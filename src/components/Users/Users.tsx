@@ -3,6 +3,13 @@ import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/user-image.jpg";
 import {UserType} from "../../redux/users-reducer";
 import {NavLink} from "react-router-dom";
+import axios from "axios";
+
+type FollowResponse = {
+    resultCode: number
+    messages: string[]
+    data: {}
+}
 
 type UserProps = {
     users: UserType[]
@@ -44,8 +51,33 @@ export const Users = ({users, pageSize, totalUsersCount, currentPage, follow, un
                         </div>
                         <div>
                             {u.followed
-                                ? <button onClick={() => unfollow(u.id)}>Unfollow</button>
-                                : <button onClick={() => follow(u.id)}>Follow</button>}
+                                ? <button onClick={() => {
+                                    axios.delete<FollowResponse>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
+                                        withCredentials: true,
+                                        headers: {
+                                            'API-KEY': '55e3cbbe-3654-424a-9e92-9780c79ddca9'
+                                        }
+                                    })
+                                        .then(res => {
+                                            if (res.data.resultCode === 0) {
+                                                unfollow(u.id)
+                                            }
+                                        })
+                                }
+                                }>Unfollow</button>
+                                : <button onClick={() => {
+                                    axios.post<FollowResponse>(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
+                                        withCredentials: true,
+                                        headers: {
+                                            'API-KEY': '55e3cbbe-3654-424a-9e92-9780c79ddca9'
+                                        }
+                                    })
+                                        .then(res => {
+                                            if (res.data.resultCode === 0) {
+                                                follow(u.id)
+                                            }
+                                        })
+                                }}>Follow</button>}
                         </div>
                     </span>
                     <span>
