@@ -15,7 +15,7 @@ type MapDispatchPropsType = {
 
 type PropsType = MapStatePropsType & MapDispatchPropsType
 
-function ProfileContainer(props: PropsType) {
+function ProfileContainer({profile, setUserProfile}: PropsType) {
 
     let { userId } = useParams()
     if (!userId) {
@@ -25,13 +25,13 @@ function ProfileContainer(props: PropsType) {
     useEffect(() => {
         axios.get<ProfileResponseType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
             .then(res => {
-                props.setUserProfile(res.data)
+                setUserProfile(res.data)
             })
     }, [])
 
     return (
         <div>
-            <Profile {...props} profile={props.profile}/>
+            <Profile profile={profile} />
         </div>
     )
 }
