@@ -1,10 +1,16 @@
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {MyPostsContainer} from './MyPosts/MyPostsContainer';
+import {ProfileResponseType} from "../../redux/profile-reducer";
 
-export const Profile = () => {
+type ProfileProps = {
+    setUserProfile: (profile: ProfileResponseType) => void
+    profile: ProfileResponseType
+}
+
+export const Profile = ({setUserProfile, profile}: ProfileProps) => {
     return (
         <div>
-            <ProfileInfo/>
+            <ProfileInfo profile={profile} />
             <MyPostsContainer />
         </div>
     )

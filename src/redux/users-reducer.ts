@@ -60,6 +60,7 @@ type SetCurrentPageActionType = ReturnType<typeof setCurrentPage>
 type SetUsersTotalCountActionType = ReturnType<typeof setUsersTotalCount>
 type ToggleIsFetchingActionType = ReturnType<typeof toggleIsFetching>
 
+
 export type ActionsTypes =
     | FollowActionType
     | UnfollowActionType
