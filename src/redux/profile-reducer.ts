@@ -24,7 +24,7 @@ let initialState = {
     newPostText: 'it-kamasutra.com'
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ActionTypes) => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case ADD_POST:
             return {...state, posts: [...state.posts, {id: v1(), message: state.newPostText, likesCount: 0}], newPostText: ''}
@@ -35,22 +35,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Ac
     }
 }
 
-export type AddPostActionType = {
-    type: typeof ADD_POST
-}
+export type AddPostActionType = ReturnType<typeof addPostAC>
+export type UpdateNewPostTextActionType = ReturnType<typeof updateNewPostTextAC>
 
-export type UpdateNewPostTextActionType = {
-    type: typeof UPDATE_NEW_POST_TEXT
-    newText: string
-}
+export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType
 
-export type ActionTypes = AddPostActionType | UpdateNewPostTextActionType
-
-export const addPostActionCreator = (): AddPostActionType => ({type: ADD_POST} as const)
-
-export const updateNewPostTextActionCreator = (newText: string): ActionTypes => (
-    {
-    type: UPDATE_NEW_POST_TEXT,
-    newText
-    } as const
-)
+export const addPostAC = () => ({type: ADD_POST} as const)
+export const updateNewPostTextAC = (newText: string) => ({type: UPDATE_NEW_POST_TEXT, newText} as const)
