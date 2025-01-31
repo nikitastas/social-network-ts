@@ -1,4 +1,6 @@
 import axios from 'axios'
+import { ProfileResponseType } from '../redux/profile-reducer'
+import { AuthResponseType } from '../redux/auth-reducer'
 
 const instance = axios.create({
   withCredentials: true,
@@ -40,5 +42,14 @@ export const usersAPI = {
   },
   unfollow(userId: number) {
     return instance.delete<FollowResponse>(`follow/${userId}`)
+  },
+  getProfile(userId: string) {
+    return instance.get<ProfileResponseType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+  },
+}
+
+export const authApi = {
+  me() {
+    return instance.get<AuthResponseType>(`auth/me`)
   },
 }

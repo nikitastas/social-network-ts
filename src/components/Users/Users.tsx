@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Users.module.css'
 import userPhoto from '../../assets/images/user-image.jpg'
-import {UserType} from '../../redux/users-reducer'
+import { UserType } from '../../redux/users-reducer'
 import { NavLink } from 'react-router-dom'
 
 type UserProps = {
@@ -58,15 +58,19 @@ export const Users = ({
             <div>
               {u.followed ? (
                 <button
-                  disabled={followingInProgress.some(id => id === u.id)}
-                  onClick={() => {unfollow(u.id)}}
+                  disabled={followingInProgress.some((id) => id === u.id)}
+                  onClick={() => {
+                    unfollow(u.id)
+                  }}
                 >
                   Unfollow
                 </button>
               ) : (
                 <button
-                  disabled={followingInProgress.some(id => id === u.id)}
-                  onClick={() => {follow(u.id)}}
+                  disabled={followingInProgress.some((id) => id === u.id)}
+                  onClick={() => {
+                    follow(u.id)
+                  }}
                 >
                   Follow
                 </button>

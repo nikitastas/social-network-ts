@@ -1,4 +1,6 @@
 import { v1 } from 'uuid'
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 export const ADD_POST = 'ADD-POST'
 export const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
@@ -77,3 +79,8 @@ export type ActionsTypes = AddPostActionType | UpdateNewPostTextActionType | Set
 export const addPostAC = () => ({ type: ADD_POST }) as const
 export const updateNewPostTextAC = (newText: string) => ({ type: UPDATE_NEW_POST_TEXT, newText }) as const
 export const setUserProfile = (profile: ProfileResponseType) => ({ type: SET_USER_PROFILE, profile }) as const
+export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
+  usersAPI.getProfile(userId).then((res) => {
+    dispatch(setUserProfile(res.data))
+  })
+}

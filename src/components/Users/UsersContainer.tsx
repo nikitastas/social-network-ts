@@ -103,16 +103,14 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Preloader } from '../common/Preloader/Preloader'
 import { Users } from './Users'
-import {
-  getUsers, follow, unfollow,
-} from '../../redux/users-reducer'
-import {AppThunkDispatch, RootState} from '../../redux/redux-store'
+import { getUsers, follow, unfollow } from '../../redux/users-reducer'
+import { AppThunkDispatch, RootState } from '../../redux/redux-store'
 
 const UsersContainer: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>()
 
   const usersPage = useSelector((state: RootState) => state.usersPage)
-  const {users, pageSize, totalUsersCount, currentPage, isFetching, followingInProgress} = usersPage
+  const { users, pageSize, totalUsersCount, currentPage, isFetching, followingInProgress } = usersPage
 
   useEffect(() => {
     dispatch(getUsers(currentPage, pageSize))
@@ -122,7 +120,7 @@ const UsersContainer: React.FC = () => {
   const onPageChanged = (pageNumber: number) => {
     //dispatch(setCurrentPage(pageNumber))
     dispatch(getUsers(pageNumber, pageSize))
-  };
+  }
 
   return (
     <>
@@ -132,13 +130,17 @@ const UsersContainer: React.FC = () => {
         pageSize={pageSize}
         totalUsersCount={totalUsersCount}
         currentPage={currentPage}
-        follow={(userId: number) => {dispatch(follow(userId))}}
-        unfollow={(userId: number) => {dispatch(unfollow(userId))}}
+        follow={(userId: number) => {
+          dispatch(follow(userId))
+        }}
+        unfollow={(userId: number) => {
+          dispatch(unfollow(userId))
+        }}
         onPageChanged={onPageChanged}
         followingInProgress={followingInProgress}
       />
     </>
-  );
-};
+  )
+}
 
 export default UsersContainer

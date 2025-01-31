@@ -1,31 +1,28 @@
 import React, { useEffect } from 'react'
 import { Profile } from './Profile'
-import axios from 'axios'
-import { connect } from 'react-redux'
-import { RootState } from '../../redux/redux-store'
-import { ProfileResponseType, setUserProfile } from '../../redux/profile-reducer'
+import {connect, useDispatch} from 'react-redux'
+import {AppThunkDispatch, RootState} from '../../redux/redux-store'
+import {getUserProfile, ProfileResponseType} from '../../redux/profile-reducer'
 import { useParams } from 'react-router-dom'
 
 type MapStatePropsType = {
   profile: ProfileResponseType
 }
 type MapDispatchPropsType = {
-  setUserProfile: (profile: ProfileResponseType) => void
+  //setUserProfile: (profile: ProfileResponseType) => void
 }
 
 type PropsType = MapStatePropsType & MapDispatchPropsType
 
-function ProfileContainer({ profile, setUserProfile }: PropsType) {
-  let { userId } = useParams()
-  if (!userId) {
-    userId = '22469'
-  }
+function ProfileContainer({ profile }: PropsType) {
+  const dispatch = useDispatch<AppThunkDispatch>()
+
+  const { userId } = useParams<{ userId: string }>()
+  const resolvedUserId = userId ?? '22469'
 
   useEffect(() => {
-    axios.get<ProfileResponseType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`).then((res) => {
-      setUserProfile(res.data)
-    })
-  }, [])
+    dispatch(getUserProfile(resolvedUserId))
+  }, [resolvedUserId])
 
   return (
     <div>
@@ -38,4 +35,4 @@ let mapStateToProps = (state: RootState): MapStatePropsType => ({
   profile: state.profilePage.profile,
 })
 
-export default connect(mapStateToProps, { setUserProfile })(ProfileContainer)
+export default connect(mapStateToProps, { /*setUserProfile*/ })(ProfileContainer)
