@@ -1,9 +1,8 @@
 import React from 'react'
 import styles from './Users.module.css'
 import userPhoto from '../../assets/images/user-image.jpg'
-import { UserType } from '../../redux/users-reducer'
+import {UserType} from '../../redux/users-reducer'
 import { NavLink } from 'react-router-dom'
-import { usersAPI } from '../../api/api'
 
 type UserProps = {
   users: UserType[]
@@ -14,7 +13,6 @@ type UserProps = {
   unfollow: (userId: number) => void
   onPageChanged: (pageNumber: number) => void
   followingInProgress: number[]
-  toggleFollowingProgress: (isFetching: boolean, userId: number) => void
 }
 
 export const Users = ({
@@ -26,7 +24,6 @@ export const Users = ({
   unfollow,
   onPageChanged,
   followingInProgress,
-  toggleFollowingProgress,
 }: UserProps) => {
   let pagesCount = Math.ceil(totalUsersCount / pageSize)
 
@@ -62,30 +59,14 @@ export const Users = ({
               {u.followed ? (
                 <button
                   disabled={followingInProgress.some(id => id === u.id)}
-                  onClick={() => {
-                    toggleFollowingProgress(true, u.id)
-                    usersAPI.unfollow(u.id).then((res) => {
-                      if (res.data.resultCode === 0) {
-                        unfollow(u.id)
-                      }
-                      toggleFollowingProgress(false, u.id)
-                    })
-                  }}
+                  onClick={() => {unfollow(u.id)}}
                 >
                   Unfollow
                 </button>
               ) : (
                 <button
                   disabled={followingInProgress.some(id => id === u.id)}
-                  onClick={() => {
-                    toggleFollowingProgress(true, u.id)
-                    usersAPI.follow(u.id).then((res) => {
-                      if (res.data.resultCode === 0) {
-                        follow(u.id)
-                      }
-                      toggleFollowingProgress(false, u.id)
-                    })
-                  }}
+                  onClick={() => {follow(u.id)}}
                 >
                   Follow
                 </button>

@@ -1,8 +1,9 @@
+/*
 import React from 'react'
 import { connect } from 'react-redux'
 import { RootState } from '../../redux/redux-store'
 import {
-  follow,
+  follow, getUsersThunkCreator,
   setCurrentPage,
   setUsers,
   setUsersTotalCount,
@@ -14,6 +15,7 @@ import {
 import { Users } from './Users'
 import { Preloader } from '../common/Preloader/Preloader'
 import { usersAPI } from '../../api/api'
+import {Dispatch} from "redux";
 
 type Props = {
   users: UserType[]
@@ -29,18 +31,20 @@ type Props = {
   toggleIsFetching: (isFetching: boolean) => void
   followingInProgress: number[]
   toggleFollowingProgress: (isFetching: boolean, userId: number) => void
+  getUsersThunkCreator: (currentPage: number, pageSize: number) => (dispatch: Dispatch) => void
 }
 
 export class UsersContainer extends React.Component<Props> {
   componentDidMount() {
-    this.props.toggleIsFetching(true)
+    this.props.getUsersThunkCreator(this.props.currentPage, this.props.pageSize)
+    /!*this.props.toggleIsFetching(true)
     if (this.props.users.length === 0) {
       usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((res) => {
         this.props.toggleIsFetching(false)
         this.props.setUsers(res.items)
         this.props.setUsersTotalCount(res.totalCount)
       })
-    }
+    }*!/
   }
 
   onPageChanged = (pageNumber: number) => {
@@ -83,17 +87,6 @@ let mapStateToProps = (state: RootState) => {
   }
 }
 
-/*let mapDispatchToProps = (dispatch: (action: ActionsTypes) => void) => {
-    return {
-        follow: followAC,
-        unfollow: unfollowAC,
-        setUsers: setUsersAC,
-        setCurrentPage: setCurrentPageAC,
-        setTotalUsersCount: setUsersTotalCountAC,
-        toggleIsFetching: toggleIsFetchingAC
-    }
-}*/
-
 export default connect(mapStateToProps, {
   follow,
   unfollow,
@@ -102,4 +95,50 @@ export default connect(mapStateToProps, {
   setUsersTotalCount,
   toggleIsFetching,
   toggleFollowingProgress,
+  getUsersThunkCreator,
 })(UsersContainer)
+*/
+
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Preloader } from '../common/Preloader/Preloader'
+import { Users } from './Users'
+import {
+  getUsers, follow, unfollow,
+} from '../../redux/users-reducer'
+import {AppThunkDispatch, RootState} from '../../redux/redux-store'
+
+const UsersContainer: React.FC = () => {
+  const dispatch = useDispatch<AppThunkDispatch>()
+
+  const usersPage = useSelector((state: RootState) => state.usersPage)
+  const {users, pageSize, totalUsersCount, currentPage, isFetching, followingInProgress} = usersPage
+
+  useEffect(() => {
+    dispatch(getUsers(currentPage, pageSize))
+  }, [currentPage, pageSize, dispatch])
+
+  // Обработка изменения страницы
+  const onPageChanged = (pageNumber: number) => {
+    //dispatch(setCurrentPage(pageNumber))
+    dispatch(getUsers(pageNumber, pageSize))
+  };
+
+  return (
+    <>
+      {isFetching && <Preloader />}
+      <Users
+        users={users}
+        pageSize={pageSize}
+        totalUsersCount={totalUsersCount}
+        currentPage={currentPage}
+        follow={(userId: number) => {dispatch(follow(userId))}}
+        unfollow={(userId: number) => {dispatch(unfollow(userId))}}
+        onPageChanged={onPageChanged}
+        followingInProgress={followingInProgress}
+      />
+    </>
+  );
+};
+
+export default UsersContainer
