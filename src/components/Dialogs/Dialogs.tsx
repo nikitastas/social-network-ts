@@ -3,14 +3,16 @@ import { DialogItem } from './DialogItem/DialogItem'
 import { Message } from './Message/Message'
 import { ChangeEvent } from 'react'
 import { DialogsPageType } from '../../redux/dialogs-reducer'
+import { Navigate } from 'react-router-dom'
 
 type Props = {
   dialogsPage: DialogsPageType
   updateNewMessageBody: (body: string) => void
   sendMessage: () => void
+  isAuth: boolean
 }
 
-export const Dialogs = ({ dialogsPage, updateNewMessageBody, sendMessage }: Props) => {
+export const Dialogs = ({ dialogsPage, updateNewMessageBody, sendMessage, isAuth }: Props) => {
   let state = dialogsPage
 
   let dialogsElements = state.dialogs.map((d) => <DialogItem key={d.id} id={d.id} name={d.name} />)
@@ -25,6 +27,8 @@ export const Dialogs = ({ dialogsPage, updateNewMessageBody, sendMessage }: Prop
     let body = e.currentTarget.value
     updateNewMessageBody(body)
   }
+
+  if (!isAuth) return <Navigate to={'/login'} />
 
   return (
     <div className={s.dialogs}>

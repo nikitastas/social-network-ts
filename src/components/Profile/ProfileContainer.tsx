@@ -3,10 +3,11 @@ import { Profile } from './Profile'
 import {connect, useDispatch} from 'react-redux'
 import {AppThunkDispatch, RootState} from '../../redux/redux-store'
 import {getUserProfile, ProfileResponseType} from '../../redux/profile-reducer'
-import { useParams } from 'react-router-dom'
+import {Navigate, useParams} from 'react-router-dom'
 
 type MapStatePropsType = {
   profile: ProfileResponseType
+  isAuth: boolean
 }
 type MapDispatchPropsType = {
   //setUserProfile: (profile: ProfileResponseType) => void
@@ -14,7 +15,7 @@ type MapDispatchPropsType = {
 
 type PropsType = MapStatePropsType & MapDispatchPropsType
 
-function ProfileContainer({ profile }: PropsType) {
+function ProfileContainer({ profile, isAuth }: PropsType) {
   const dispatch = useDispatch<AppThunkDispatch>()
 
   const { userId } = useParams<{ userId: string }>()
@@ -23,6 +24,8 @@ function ProfileContainer({ profile }: PropsType) {
   useEffect(() => {
     dispatch(getUserProfile(resolvedUserId))
   }, [resolvedUserId])
+
+  if (!isAuth) return <Navigate to={'/login'} />
 
   return (
     <div>
@@ -33,6 +36,7 @@ function ProfileContainer({ profile }: PropsType) {
 
 let mapStateToProps = (state: RootState): MapStatePropsType => ({
   profile: state.profilePage.profile,
+  isAuth: state.auth.isAuth
 })
 
 export default connect(mapStateToProps, { /*setUserProfile*/ })(ProfileContainer)
