@@ -1,24 +1,35 @@
-import { ActionsTypes, sendMessageAC, updateNewMessageBodyAC } from '../../redux/dialogs-reducer'
-import { Dialogs } from './Dialogs'
-import { connect } from 'react-redux'
-import { RootState } from '../../redux/redux-store'
+import React from 'react';
+import { Dialogs } from './Dialogs';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/redux-store';
+import { sendMessageAC, updateNewMessageBodyAC } from '../../redux/dialogs-reducer';
+import { useAuth } from '../../contexts/AuthContext';
+import { Navigate } from 'react-router-dom';
 
-let mapStateToProps = (state: RootState) => {
-  return {
-    dialogsPage: state.dialogsPage,
-    isAuth: state.auth.isAuth
+export const DialogsContainer = () => {
+  const dispatch = useDispatch();
+  const dialogsPage = useSelector((state: RootState) => state.dialogsPage);
+  const { isAuth } = useAuth(); // Используем контекст для проверки аутентификации
+
+  // Проверка аутентификации
+  if (!isAuth) {
+    return <Navigate to="/login" />;
   }
-}
 
-let mapDispatchToProps = (dispatch: (action: ActionsTypes) => void) => {
-  return {
-    updateNewMessageBody: (body: string) => {
-      dispatch(updateNewMessageBodyAC(body))
-    },
-    sendMessage: () => {
-      dispatch(sendMessageAC())
-    },
-  }
-}
+  // Обработчики действий
+  const updateNewMessageBody = (body: string) => {
+    dispatch(updateNewMessageBodyAC(body));
+  };
 
-export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
+  const sendMessage = () => {
+    dispatch(sendMessageAC());
+  };
+
+  return (
+    <Dialogs
+      dialogsPage={dialogsPage}
+      updateNewMessageBody={updateNewMessageBody}
+      sendMessage={sendMessage}
+    />
+  );
+};
