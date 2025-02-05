@@ -19,7 +19,6 @@ const ProfileContainer = () => {
   }, [resolvedUserId, dispatch])
 
   if (!isAuth) {
-    debugger
     return <Navigate to="/login" />
   }
 
