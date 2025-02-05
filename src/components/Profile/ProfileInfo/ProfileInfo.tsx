@@ -1,6 +1,7 @@
 import s from './ProfileInfo.module.css'
 import { ProfileResponseType } from '../../../redux/profile-reducer'
 import { Preloader } from '../../common/Preloader/Preloader'
+import { ProfileStatus } from './ProfileStatus'
 
 export type ProfileInfoProps = {
   profile: ProfileResponseType
@@ -19,7 +20,7 @@ export const ProfileInfo = ({ profile }: ProfileInfoProps) => {
       <div className={s.descriptionBlock}>
         <img src={profile?.photos.large} alt="Profile Avatar " />
         <div>{' ' + profile.fullName + ' '}</div>
-        <div>description</div>
+        <ProfileStatus status={'Status'} />
       </div>
     </div>
   )
