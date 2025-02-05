@@ -105,9 +105,12 @@ import { Preloader } from '../common/Preloader/Preloader'
 import { Users } from './Users'
 import { getUsers, follow, unfollow } from '../../redux/users-reducer'
 import { AppThunkDispatch, RootState } from '../../redux/redux-store'
+import {useAuth} from "../../contexts/AuthContext";
+import {Navigate} from "react-router-dom";
 
 const UsersContainer: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>()
+  const { isAuth } = useAuth();
 
   const usersPage = useSelector((state: RootState) => state.usersPage)
   const { users, pageSize, totalUsersCount, currentPage, isFetching, followingInProgress } = usersPage
@@ -120,6 +123,10 @@ const UsersContainer: React.FC = () => {
   const onPageChanged = (pageNumber: number) => {
     //dispatch(setCurrentPage(pageNumber))
     dispatch(getUsers(pageNumber, pageSize))
+  }
+
+  if (!isAuth) {
+    return <Navigate to="/login" />;
   }
 
   return (
