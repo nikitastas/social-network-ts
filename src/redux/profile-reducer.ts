@@ -98,14 +98,12 @@ export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
 
 export const getStatus = (userId: number) => (dispatch: Dispatch) => {
   profileAPI.getStatus(userId).then((res) => {
-    debugger
     dispatch(setStatusAC(res.data))
   })
 }
 
 export const updateStatus = (status: string) => (dispatch: Dispatch) => {
   profileAPI.updateStatus(status).then((res) => {
-    debugger
     if (res.data.resultCode === 0) {
       dispatch(setStatusAC(status))
     }
