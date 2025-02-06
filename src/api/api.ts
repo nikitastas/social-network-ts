@@ -43,8 +43,19 @@ export const usersAPI = {
   unfollow(userId: number) {
     return instance.delete<FollowResponse>(`follow/${userId}`)
   },
+}
+
+type UpdateStatusResponseType = {resultCode: number, messages: string[], data: {}}
+
+export const profileAPI = {
   getProfile(userId: string) {
-    return instance.get<ProfileResponseType>(`https://social-network.samuraijs.com/api/1.0/profile/${userId}`)
+    return instance.get<ProfileResponseType>(`profile/${userId}`)
+  },
+  getStatus(userId: number) {
+    return instance.get<string>(`profile/status/${userId}`)
+  },
+  updateStatus(status: string) {
+    return instance.put<UpdateStatusResponseType>(`profile/status`, {status})
   },
 }
 

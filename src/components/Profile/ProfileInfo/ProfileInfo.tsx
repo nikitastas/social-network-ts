@@ -5,9 +5,10 @@ import { ProfileStatus } from './ProfileStatus'
 
 export type ProfileInfoProps = {
   profile: ProfileResponseType
+  status: string
 }
 
-export const ProfileInfo = ({ profile }: ProfileInfoProps) => {
+export const ProfileInfo = ({ profile, status }: ProfileInfoProps) => {
   if (!profile) {
     return <Preloader />
   }
@@ -20,7 +21,7 @@ export const ProfileInfo = ({ profile }: ProfileInfoProps) => {
       <div className={s.descriptionBlock}>
         <img src={profile?.photos.large} alt="Profile Avatar " />
         <div>{' ' + profile.fullName + ' '}</div>
-        <ProfileStatus status={'Status'} />
+        <ProfileStatus status={status} />
       </div>
     </div>
   )
