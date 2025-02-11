@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { Profile } from './Profile'
 import { useDispatch, useSelector } from 'react-redux'
-import {AppThunkDispatch, RootState} from '../../redux/redux-store'
-import {getStatus, getUserProfile} from '../../redux/profile-reducer'
+import { AppThunkDispatch, RootState } from 'my-redux/redux-store'
+import { getStatus, getUserProfile } from 'my-redux/profile-reducer'
 import { useParams } from 'react-router-dom'
 import { Navigate } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from 'contexts/AuthContext'
 
 const ProfileContainer = () => {
   const dispatch = useDispatch<AppThunkDispatch>()

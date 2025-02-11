@@ -1,13 +1,13 @@
-import React, {ChangeEvent, useState} from 'react'
-import {useDispatch} from "react-redux";
-import {AppThunkDispatch} from "../../../redux/redux-store";
-import {updateStatus} from "../../../redux/profile-reducer";
+import React, { ChangeEvent, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { AppThunkDispatch } from 'my-redux/redux-store'
+import { updateStatus } from 'my-redux/profile-reducer'
 
 type ProfileStatusProps = {
   status: string
 }
 
-export const ProfileStatus = ({status}: ProfileStatusProps) => {
+export const ProfileStatus = ({ status }: ProfileStatusProps) => {
   const dispatch = useDispatch<AppThunkDispatch>()
   const [editMode, setEditMode] = useState(false)
   const [localStatus, setLocalStatus] = useState(status)
@@ -27,16 +27,16 @@ export const ProfileStatus = ({status}: ProfileStatusProps) => {
 
   return (
     <div>
-      {!editMode &&
+      {!editMode && (
         <div>
           <span onDoubleClick={activateEditMode}>{status || '----------'}</span>
         </div>
-      }
-      {editMode &&
+      )}
+      {editMode && (
         <div>
-          <input value={localStatus} onChange={onStatusChangeHandler} onBlur={deactivateEditMode} autoFocus={true}/>
+          <input value={localStatus} onChange={onStatusChangeHandler} onBlur={deactivateEditMode} autoFocus={true} />
         </div>
-      }
+      )}
     </div>
   )
 }

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import {getAuthUserData} from '../../redux/auth-reducer'
-import {connect, useDispatch} from 'react-redux'
-import {AppThunkDispatch, RootState} from '../../redux/redux-store'
+import { getAuthUserData } from 'my-redux/auth-reducer'
+import { connect, useDispatch } from 'react-redux'
+import { AppThunkDispatch, RootState } from 'my-redux/redux-store'
 import { Header } from './Header'
 
 type MapStatePropsType = {

@@ -1,6 +1,6 @@
 import axios from 'axios'
-import { ProfileResponseType } from '../redux/profile-reducer'
-import { AuthResponseType } from '../redux/auth-reducer'
+import { ProfileResponseType } from 'my-redux/profile-reducer'
+import { AuthResponseType } from 'my-redux/auth-reducer'
 
 const instance = axios.create({
   withCredentials: true,
@@ -45,7 +45,7 @@ export const usersAPI = {
   },
 }
 
-type UpdateStatusResponseType = {resultCode: number, messages: string[], data: {}}
+type UpdateStatusResponseType = { resultCode: number; messages: string[]; data: {} }
 
 export const profileAPI = {
   getProfile(userId: string) {
@@ -55,7 +55,7 @@ export const profileAPI = {
     return instance.get<string>(`profile/status/${userId}`)
   },
   updateStatus(status: string) {
-    return instance.put<UpdateStatusResponseType>(`profile/status`, {status})
+    return instance.put<UpdateStatusResponseType>(`profile/status`, { status })
   },
 }
 

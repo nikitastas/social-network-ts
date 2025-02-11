@@ -1,5 +1,5 @@
 import s from './ProfileInfo.module.css'
-import { ProfileResponseType } from '../../../redux/profile-reducer'
+import { ProfileResponseType } from 'my-redux/profile-reducer'
 import { Preloader } from '../../common/Preloader/Preloader'
 import { ProfileStatus } from './ProfileStatus'
 

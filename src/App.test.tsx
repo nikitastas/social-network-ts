@@ -3,7 +3,7 @@ export {}
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import App from './App';
-import {store} from './redux/state';
+import {store} from './my-redux/state';
 
 export type PostDataType = {
   id: number

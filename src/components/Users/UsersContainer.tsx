@@ -1,7 +1,7 @@
 /*
 import React from 'react'
-import { connect } from 'react-redux'
-import { RootState } from '../../redux/redux-store'
+import { connect } from 'react-my-redux'
+import { RootState } from '../../my-redux/my-redux-store'
 import {
   follow, getUsersThunkCreator,
   setCurrentPage,
@@ -11,11 +11,11 @@ import {
   toggleIsFetching,
   unfollow,
   UserType,
-} from '../../redux/users-reducer'
+} from '../../my-redux/users-reducer'
 import { Users } from './Users'
 import { Preloader } from '../common/Preloader/Preloader'
 import { usersAPI } from '../../api/api'
-import {Dispatch} from "redux";
+import {Dispatch} from "my-redux";
 
 type Props = {
   users: UserType[]
@@ -103,14 +103,14 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Preloader } from '../common/Preloader/Preloader'
 import { Users } from './Users'
-import { getUsers, follow, unfollow } from '../../redux/users-reducer'
-import { AppThunkDispatch, RootState } from '../../redux/redux-store'
-import {useAuth} from "../../contexts/AuthContext";
-import {Navigate} from "react-router-dom";
+import { getUsers, follow, unfollow } from 'my-redux/users-reducer'
+import { AppThunkDispatch, RootState } from 'my-redux/redux-store'
+import { useAuth } from '../../contexts/AuthContext'
+import { Navigate } from 'react-router-dom'
 
 const UsersContainer: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>()
-  const { isAuth } = useAuth();
+  const { isAuth } = useAuth()
 
   const usersPage = useSelector((state: RootState) => state.usersPage)
   const { users, pageSize, totalUsersCount, currentPage, isFetching, followingInProgress } = usersPage
@@ -126,7 +126,7 @@ const UsersContainer: React.FC = () => {
   }
 
   if (!isAuth) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" />
   }
 
   return (

@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Users.module.css'
 import userPhoto from '../../assets/images/user-image.jpg'
-import { UserType } from '../../redux/users-reducer'
+import { UserType } from 'my-redux/users-reducer'
 import { NavLink } from 'react-router-dom'
 
 type UserProps = {

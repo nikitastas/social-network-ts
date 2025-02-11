@@ -14,7 +14,15 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": "src",
+    /*"paths": {
+      "src": ["src"]
+    },*/
+    /*"baseUrl": "src", // Указывает базовую директорию
+    "paths": {
+      "*": ["*"] // Позволяет использовать абсолютные пути
+    },*/
   },
   "include": ["src"]
 }
