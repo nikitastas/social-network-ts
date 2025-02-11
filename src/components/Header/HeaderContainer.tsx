@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { getAuthUserData } from 'my-redux/auth-reducer'
+import { getAuthUserData, logoutTC } from 'my-redux/auth-reducer'
 import { connect, useDispatch } from 'react-redux'
 import { AppThunkDispatch, RootState } from 'my-redux/redux-store'
 import { Header } from './Header'
@@ -8,18 +8,20 @@ type MapStatePropsType = {
   isAuth: boolean
   login: string
 }
-type MapDispatchPropsType = {}
+type MapDispatchPropsType = {
+  logoutTC: () => void
+}
 
 export type HeaderContainerProps = MapStatePropsType & MapDispatchPropsType
 
-export const HeaderContainer = ({ login, isAuth }: HeaderContainerProps) => {
+export const HeaderContainer = ({ login, isAuth, logoutTC }: HeaderContainerProps) => {
   const dispatch = useDispatch<AppThunkDispatch>()
 
   useEffect(() => {
     dispatch(getAuthUserData())
   }, [])
 
-  return <Header login={login} isAuth={isAuth} />
+  return <Header login={login} isAuth={isAuth} logoutTC={logoutTC} />
 }
 
 const mapStateToProps = (state: RootState): MapStatePropsType => ({
@@ -27,4 +29,4 @@ const mapStateToProps = (state: RootState): MapStatePropsType => ({
   login: state.auth.login,
 })
 
-export default connect(mapStateToProps, {})(HeaderContainer)
+export default connect(mapStateToProps, { logoutTC })(HeaderContainer)

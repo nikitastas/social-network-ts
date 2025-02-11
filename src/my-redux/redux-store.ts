@@ -1,10 +1,10 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux'
+import { applyMiddleware, combineReducers, createStore, UnknownAction } from 'redux'
 import { profileReducer } from './profile-reducer'
 import { dialogsReducer } from './dialogs-reducer'
 import { sidebarReducer } from './sidebar-reducer'
 import { usersReducer } from './users-reducer'
 import { authReducer } from './auth-reducer'
-import { thunk, ThunkDispatch } from 'redux-thunk'
+import { thunk, ThunkAction, ThunkDispatch } from 'redux-thunk'
 
 let rootReducer = combineReducers({
   profilePage: profileReducer,
@@ -23,6 +23,8 @@ export type AppDispatch = typeof store.dispatch
 
 // Тип для Dispatch с поддержкой Thunk
 export type AppThunkDispatch = ThunkDispatch<RootState, unknown, any>
+
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, UnknownAction>
 
 // @ts-ignore
 window.store = store

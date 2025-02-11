@@ -1,13 +1,15 @@
 import React from 'react'
 import s from './Header.module.css'
 import { NavLink } from 'react-router-dom'
+import Button from '@mui/material/Button'
 
 export type HeaderProps = {
   login: string
   isAuth: boolean
+  logoutTC: () => void
 }
 
-export const Header = ({ login, isAuth }: HeaderProps) => {
+export const Header = ({ login, isAuth, logoutTC }: HeaderProps) => {
   return (
     <header className={s.header}>
       <img
@@ -15,7 +17,18 @@ export const Header = ({ login, isAuth }: HeaderProps) => {
         alt=""
       />
 
-      <div className={s.loginBlock}>{isAuth ? login : <NavLink to={'/login'}>Login</NavLink>}</div>
+      <div className={s.loginBlock}>
+        {isAuth ? (
+          <div>
+            {login} -{' '}
+            <Button type={'submit'} variant={'contained'} color={'primary'} onClick={logoutTC}>
+              Log out
+            </Button>
+          </div>
+        ) : (
+          <NavLink to={'/login'}>Login</NavLink>
+        )}
+      </div>
     </header>
   )
 }

@@ -8,8 +8,11 @@ import Grid from '@mui/material/Grid'
 import TextField from '@mui/material/TextField'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import s from './Login.module.css'
-import { useDispatch } from 'react-redux'
-import { AppThunkDispatch } from 'my-redux/redux-store'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppThunkDispatch, RootState } from 'my-redux/redux-store'
+import { loginTC } from 'my-redux/auth-reducer'
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 type Inputs = {
   email: string
@@ -18,17 +21,15 @@ type Inputs = {
 }
 
 export const Login = () => {
-  debugger
-  //const isLoggedIn = useAppSelector(selectIsLoggedIn)
+  const isLoggedIn = useSelector((state: RootState) => state.auth.isAuth)
   const dispatch = useDispatch<AppThunkDispatch>()
+  const navigate = useNavigate()
 
-  //const navigate = useNavigate()
-
-  /*useEffect(() => {
+  useEffect(() => {
     if (isLoggedIn) {
-      navigate(Path.Main)
+      navigate('/profile')
     }
-  }, [isLoggedIn])*/
+  }, [isLoggedIn])
 
   const {
     register,
@@ -39,7 +40,7 @@ export const Login = () => {
   } = useForm<Inputs>({ defaultValues: { email: '', password: '', rememberMe: false } })
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    //dispatch(loginTC(data))
+    dispatch(loginTC(data))
     reset()
   }
 
