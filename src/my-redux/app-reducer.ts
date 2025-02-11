@@ -1,5 +1,3 @@
-import { Dispatch } from 'redux'
-import { authApi } from 'api/api'
 import { AppThunk } from 'my-redux/redux-store'
 import { getAuthUserData } from 'my-redux/auth-reducer'
 

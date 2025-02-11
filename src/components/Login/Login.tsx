@@ -29,7 +29,7 @@ export const Login = () => {
     if (isLoggedIn) {
       navigate('/profile')
     }
-  }, [isLoggedIn])
+  }, [isLoggedIn, navigate])
 
   const {
     register,
