@@ -105,7 +105,7 @@ import { Preloader } from '../common/Preloader/Preloader'
 import { Users } from './Users'
 import { getUsers, follow, unfollow } from 'my-redux/users-reducer'
 import { AppThunkDispatch, RootState } from 'my-redux/redux-store'
-import { useAuth } from '../../contexts/AuthContext'
+import { useAuth } from 'contexts/AuthContext'
 import { Navigate } from 'react-router-dom'
 
 const UsersContainer: React.FC = () => {

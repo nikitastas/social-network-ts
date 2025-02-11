@@ -20,7 +20,6 @@ export const AddNewPostForm = ({ onAddPost }: AddNewPostFormProps) => {
     register,
     handleSubmit,
     reset,
-    control,
     formState: { errors },
   } = useForm<Inputs>({ defaultValues: { newPost: '' } })
 

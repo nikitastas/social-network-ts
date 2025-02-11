@@ -20,7 +20,6 @@ export const AddMessageForm = ({ sendMessage }: AddMessageFormProps) => {
     register,
     handleSubmit,
     reset,
-    control,
     formState: { errors },
   } = useForm<Inputs>({ defaultValues: { newMessage: '' } })
 
