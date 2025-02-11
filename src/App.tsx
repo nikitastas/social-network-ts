@@ -6,8 +6,29 @@ import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import { Login } from 'components/Login/Login'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppThunkDispatch, RootState } from 'my-redux/redux-store'
+import { useEffect } from 'react'
+import { setIsInitializedTC } from 'my-redux/app-reducer'
+import { CircularProgress } from '@mui/material'
+import s from './App.module.css'
 
 function App() {
+  const dispatch = useDispatch<AppThunkDispatch>()
+  const isInitialized = useSelector((state: RootState) => state.app.isInitialized)
+
+  useEffect(() => {
+    dispatch(setIsInitializedTC())
+  }, [])
+
+  if (!isInitialized) {
+    return (
+      <div className={s.circularProgressContainer}>
+        <CircularProgress size={150} thickness={3} />
+      </div>
+    )
+  }
+
   return (
     <BrowserRouter>
       <div className="app-wrapper">
