@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from 'my-redux/redux-store'
 import { AddNewPostForm } from 'components/Profile/MyPosts/AddNewPostForm/AddNewPostForm'
 import { addPostAC } from 'my-redux/profile-reducer'
+import { memo } from 'react'
 
-export const MyPosts = () => {
+export const MyPosts = memo(() => {
   const dispatch = useDispatch()
   const posts = useSelector((state: RootState) => state.profilePage.posts)
 
@@ -19,15 +20,9 @@ export const MyPosts = () => {
     <div className={s.postsBlock}>
       <h3>My posts</h3>
       <div>
-        {/*<div>
-          <textarea ref={newPostElement} value={newPostText} onChange={onPostChange} />
-        </div>
-        <div>
-          <button onClick={onAddPost}>Add post</button>
-        </div>*/}
         <AddNewPostForm onAddPost={onAddPost} />
       </div>
       <div className={s.posts}>{postsElements}</div>
     </div>
   )
-}
+})
