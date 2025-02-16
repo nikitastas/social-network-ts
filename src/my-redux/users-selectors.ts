@@ -1,20 +1,24 @@
 import { RootState } from 'my-redux/redux-store'
+import { createSelector } from 'reselect'
 
-export const getUsersSelector = (state: RootState) => {
+export const users = (state: RootState) => {
   return state.usersPage.users
 }
-export const getPageSizeSelector = (state: RootState) => {
+export const memoizedUsers = createSelector(users, (users) => {
+  return users.filter((user) => true)
+})
+export const pageSize = (state: RootState) => {
   return state.usersPage.pageSize
 }
-export const getTotalUsersCountSelector = (state: RootState) => {
+export const totalUsersCount = (state: RootState) => {
   return state.usersPage.totalUsersCount
 }
-export const getCurrentPageSelector = (state: RootState) => {
+export const currentPage = (state: RootState) => {
   return state.usersPage.currentPage
 }
-export const getIsFetchingSelector = (state: RootState) => {
+export const isFetching = (state: RootState) => {
   return state.usersPage.isFetching
 }
-export const getFollowingInProgressSelector = (state: RootState) => {
+export const followingInProgress = (state: RootState) => {
   return state.usersPage.followingInProgress
 }

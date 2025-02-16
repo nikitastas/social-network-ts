@@ -7,25 +7,18 @@ import { AppThunkDispatch } from 'my-redux/redux-store'
 import { useAuth } from 'contexts/AuthContext'
 import { Navigate } from 'react-router-dom'
 import { useAppSelector } from 'hooks/useAppSelector'
-import {
-  getCurrentPageSelector,
-  getFollowingInProgressSelector,
-  getIsFetchingSelector,
-  getPageSizeSelector,
-  getTotalUsersCountSelector,
-  getUsersSelector,
-} from 'my-redux/users-selectors'
+import { usersSelectors } from '../../my-redux/index'
 
 const UsersContainer: React.FC = () => {
   const dispatch = useDispatch<AppThunkDispatch>()
   const { isAuth } = useAuth()
 
-  const users = useAppSelector(getUsersSelector)
-  const pageSize = useAppSelector(getPageSizeSelector)
-  const totalUsersCount = useAppSelector(getTotalUsersCountSelector)
-  const currentPage = useAppSelector(getCurrentPageSelector)
-  const isFetching = useAppSelector(getIsFetchingSelector)
-  const followingInProgress = useAppSelector(getFollowingInProgressSelector)
+  const users = useAppSelector(usersSelectors.memoizedUsers)
+  const pageSize = useAppSelector(usersSelectors.pageSize)
+  const totalUsersCount = useAppSelector(usersSelectors.totalUsersCount)
+  const currentPage = useAppSelector(usersSelectors.currentPage)
+  const isFetching = useAppSelector(usersSelectors.isFetching)
+  const followingInProgress = useAppSelector(usersSelectors.followingInProgress)
 
   useEffect(() => {
     dispatch(getUsers(currentPage, pageSize))
