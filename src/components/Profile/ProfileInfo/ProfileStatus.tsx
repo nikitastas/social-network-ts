@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { AppThunkDispatch } from 'my-redux/redux-store'
 import { updateStatus } from 'my-redux/profile-reducer'
@@ -11,6 +11,10 @@ export const ProfileStatus = ({ status }: ProfileStatusProps) => {
   const dispatch = useDispatch<AppThunkDispatch>()
   const [editMode, setEditMode] = useState(false)
   const [localStatus, setLocalStatus] = useState(status)
+
+  useEffect(() => {
+    setLocalStatus(status)
+  }, [status])
 
   const activateEditMode = () => {
     setEditMode(true)
