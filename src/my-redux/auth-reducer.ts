@@ -2,7 +2,7 @@ import { Dispatch } from 'redux'
 import { authApi } from 'api/api'
 import { AppThunk } from 'my-redux/redux-store'
 
-export const SET_USER_DATA = 'SET_USER_DATA'
+export const SET_USER_DATA = 'auth/SET_USER_DATA'
 
 export type AuthResponseType = {
   data: AuthResponseUserType
@@ -40,29 +40,26 @@ export type ActionsTypes = SetUserDataActionType
 export const setAuthUserData = (payload: { id: number; login: string; email: string; isAuth: boolean }) =>
   ({ type: SET_USER_DATA, payload }) as const
 
-export const getAuthUserData = () => (dispatch: Dispatch) => {
-  return authApi.me().then((res) => {
-    if (res.data.resultCode === 0) {
-      let { id, login, email } = res.data.data
-      dispatch(setAuthUserData({ id, login, email, isAuth: true }))
-    }
-  })
+export const getAuthUserData = () => async (dispatch: Dispatch) => {
+  let response = await authApi.me()
+  if (response.data.resultCode === 0) {
+    let { id, login, email } = response.data.data
+    dispatch(setAuthUserData({ id, login, email, isAuth: true }))
+  }
 }
 
 export const loginTC =
   (args: { email: string; password: string; rememberMe: boolean }): AppThunk =>
-  (dispatch) => {
-    authApi.login(args).then((res) => {
-      if (res.data.resultCode === 0) {
-        dispatch(getAuthUserData())
-      }
-    })
+  async (dispatch) => {
+    let response = await authApi.login(args)
+    if (response.data.resultCode === 0) {
+      dispatch(getAuthUserData())
+    }
   }
 
-export const logoutTC = (): AppThunk => (dispatch) => {
-  authApi.logout().then((res) => {
-    if (res.data.resultCode === 0) {
-      dispatch(setAuthUserData({ id: 0, login: '', email: '', isAuth: false }))
-    }
-  })
+export const logoutTC = (): AppThunk => async (dispatch) => {
+  let response = await authApi.logout()
+  if (response.data.resultCode === 0) {
+    dispatch(setAuthUserData({ id: 0, login: '', email: '', isAuth: false }))
+  }
 }

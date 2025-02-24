@@ -27,7 +27,7 @@ export type RootObjectItems = {
   status?: any
   followed: boolean
 }
-type FollowResponse = {
+export type FollowResponse = {
   resultCode: number
   messages: string[]
   data: {}
