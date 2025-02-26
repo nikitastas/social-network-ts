@@ -9,7 +9,7 @@ import { Navigate } from 'react-router-dom'
 import { useAppSelector } from 'hooks/useAppSelector'
 import { usersSelectors } from '../../my-redux/index'
 
-const UsersContainer: React.FC = () => {
+const UsersContainer = () => {
   const dispatch = useDispatch<AppThunkDispatch>()
   const { isAuth } = useAuth()
 

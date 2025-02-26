@@ -1,5 +1,6 @@
 import { Dispatch } from 'redux'
 import { FollowResponse, usersAPI } from 'api/api'
+import { updateObjectInArray } from 'utils/objects-helpers'
 
 export const FOLLOW = 'FOLLOW'
 export const UNFOLLOW = 'UNFOLLOW'
@@ -42,9 +43,9 @@ let initialState = {
 export const usersReducer = (state: UsersType = initialState, action: ActionsTypes) => {
   switch (action.type) {
     case FOLLOW:
-      return { ...state, users: state.users.map((u) => (u.id === action.userId ? { ...u, followed: true } : u)) }
+      return { ...state, users: updateObjectInArray(state.users, action.userId, 'id', { followed: true }) }
     case UNFOLLOW:
-      return { ...state, users: state.users.map((u) => (u.id === action.userId ? { ...u, followed: false } : u)) }
+      return { ...state, users: updateObjectInArray(state.users, action.userId, 'id', { followed: false }) }
     case SET_USERS:
       return { ...state, users: action.users }
     case SET_CURRENT_PAGE:
@@ -121,13 +122,9 @@ const followUnfollowFlow = async (
 }
 
 export const follow = (userId: number) => async (dispatch: Dispatch) => {
-  let apiMethod = usersAPI.follow.bind(usersAPI)
-  let actionCreator = followSuccess
-  followUnfollowFlow(dispatch, userId, apiMethod, actionCreator)
+  await followUnfollowFlow(dispatch, userId, usersAPI.follow.bind(usersAPI), followSuccess)
 }
 
 export const unfollow = (userId: number) => async (dispatch: Dispatch) => {
-  let apiMethod = usersAPI.unfollow.bind(usersAPI)
-  let actionCreator = unfollowSuccess
-  followUnfollowFlow(dispatch, userId, apiMethod, actionCreator)
+  await followUnfollowFlow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), unfollowSuccess)
 }
