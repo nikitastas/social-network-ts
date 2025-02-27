@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore, UnknownAction } from 'redux'
+import { applyMiddleware, combineReducers, compose, createStore, UnknownAction } from 'redux'
 import { profileReducer } from './profile-reducer'
 import { dialogsReducer } from './dialogs-reducer'
 import { sidebarReducer } from './sidebar-reducer'
@@ -18,7 +18,8 @@ let rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>
 
-const store = createStore(rootReducer, {}, applyMiddleware(thunk))
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = createStore(rootReducer, {}, composeEnhancers(applyMiddleware(thunk)))
 
 // Тип для стандартного Dispatch
 export type AppDispatch = typeof store.dispatch
@@ -29,6 +30,6 @@ export type AppThunkDispatch = ThunkDispatch<RootState, unknown, any>
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, UnknownAction>
 
 // @ts-ignore
-window.store = store
+window.__store__ = store
 
 export default store

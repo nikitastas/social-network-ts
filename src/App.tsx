@@ -6,12 +6,13 @@ import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import { Login } from 'components/Login/Login'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppThunkDispatch, RootState } from 'my-redux/redux-store'
-import { useEffect } from 'react'
+import { Provider, useDispatch, useSelector } from 'react-redux'
+import store, { AppThunkDispatch, RootState } from 'my-redux/redux-store'
+import React, { useEffect } from 'react'
 import { setIsInitializedTC } from 'my-redux/app-reducer'
 import { CircularProgress } from '@mui/material'
 import s from './App.module.css'
+import { AuthProvider } from 'contexts/AuthContext'
 
 function App() {
   const dispatch = useDispatch<AppThunkDispatch>()
@@ -50,4 +51,14 @@ function App() {
   )
 }
 
-export default App
+const SamuraiAppJS = () => {
+  return (
+    <Provider store={store}>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </Provider>
+  )
+}
+
+export default SamuraiAppJS

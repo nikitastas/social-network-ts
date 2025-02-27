@@ -1,3 +1,7 @@
+import React from 'react'
+import ReactDOM from 'react-dom'
+import SamuraiAppJS from 'App'
+
 export {}
 /*
 import React from 'react';
@@ -57,3 +61,9 @@ test('renders learn react link', () => {
   expect(linkElement).toBeInTheDocument();
 });
 */
+
+test('renders without crashing', () => {
+  const div = document.createElement('div')
+  ReactDOM.render(<SamuraiAppJS />, div)
+  ReactDOM.unmountComponentAtNode(div)
+})
