@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     dispatch(setIsInitializedTC())
-  }, [])
+  }, [dispatch])
 
   if (!isInitialized) {
     return (
