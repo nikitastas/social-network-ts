@@ -6,7 +6,7 @@ import { sendMessageAC } from 'my-redux/dialogs-reducer'
 import { useAuth } from 'contexts/AuthContext'
 import { Navigate } from 'react-router-dom'
 
-export const DialogsContainer = () => {
+const DialogsContainer = () => {
   const dispatch = useDispatch()
   const dialogsPage = useSelector((state: RootState) => state.dialogsPage)
   const { isAuth } = useAuth() // Используем контекст для проверки аутентификации
@@ -22,3 +22,5 @@ export const DialogsContainer = () => {
 
   return <Dialogs dialogsPage={dialogsPage} sendMessage={sendMessage} />
 }
+
+export default DialogsContainer
